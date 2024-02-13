@@ -1,0 +1,39 @@
+<div class="flex-column  d-flex align-items-center justify-content-center .bg-light" style = "height: auto;">
+  <h1> Published Authors List 2024</h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <!-- Author Table -->
+  <div>
+    <table class="table table-light table-striped">
+      <ol class="fs-2">
+        <thead class="table-light">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Age </td>
+          <td class="text-center"> Genres </td>
+          <td class="text-center"> Total Number of Books Published</td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+        <% @authors.each do |a| %>
+          <tr>
+            <td class="text-center"> <%= a.id %> </td>
+            <td class="text-center"> <%= link_to a.author_name, author_path(a) %> </td>
+            <td class="text-center"> <%= a.age %> </td>
+            <td class="text-center"> <%= a.books %> </td>
+            <td class="text-center"> <%= a.number_of_books_published %> </td>
+            <td class="text-center"><%= button_to "Show",author_path(a),method: :get, class:"bg-secondary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_author_path(a),method: :get, class:"bg-secondary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",author_path(a),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to "Add New Author", new_author_path, method: :get ,class:"bg-secondary border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+</div>
