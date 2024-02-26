@@ -1,6 +1,5 @@
 <div class="flex-column  d-flex align-items-center justify-content-center .bg-light" style = "height: auto;">
   <h1> Published Authors List 2024</h1>
-  <!--Error Message-->
   <% if flash[:errors] %>
     <% flash.each do |name,message| %>
       <p class="text-danger"><%= message%></p>
@@ -8,13 +7,18 @@
   <% end %>
   <!-- Author Table -->
   <div>
-    <table class="table table-light table-striped">
+    <div class="btn-group">
+      <%= button_to "Log In", login_path, method: :get, class:"bg-secondary border-0 rounded-pill shadow p-3 m-3" %>
+      <%= button_to "Sign Up", signup_path, method: :get, class:"bg-secondary border-0 rounded-pill shadow p-3 m-3" %>
+    </div> 
+   <table class="table table-light table-striped">
       <ol class="fs-2">
         <thead class="table-light">
           <td class="text-center"> Id </td>
           <td class="text-center"> Name </td>
           <td class="text-center"> Age </td>
           <td class="text-center"> Genres </td>
+          <td class="text-center"> Publisher </td>
           <td class="text-center"> Total Number of Books Published</td>
           <td colspan=3 class="text-center"> Action </td>
         </thead>
@@ -24,6 +28,7 @@
             <td class="text-center"> <%= link_to a.author_name, author_path(a) %> </td>
             <td class="text-center"> <%= a.age %> </td>
             <td class="text-center"> <%= a.books %> </td>
+            <td class="text-center"> <%= a.publisher%> </td>
             <td class="text-center"> <%= a.number_of_books_published %> </td>
             <td class="text-center"><%= button_to "Show",author_path(a),method: :get, class:"bg-secondary border-0 rounded-pill shadow px-3 py-2" %></td>
             <td class="text-center"><%= button_to "Edit",edit_author_path(a),method: :get, class:"bg-secondary border-0 rounded-pill shadow px-3 py-2" %></td>

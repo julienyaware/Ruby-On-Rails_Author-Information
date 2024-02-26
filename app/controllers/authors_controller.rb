@@ -1,5 +1,7 @@
 class AuthorsController < ApplicationController
   before_action :set_author_params, only: %i[show edit update destroy]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+
 
   def index
     @authors = Author.all
@@ -7,6 +9,13 @@ class AuthorsController < ApplicationController
 
   def new
     @author = Author.new
+  end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
   end
 
   def create
@@ -51,6 +60,6 @@ class AuthorsController < ApplicationController
   end
 
   def author_params
-    params.require(:author).permit(:author_name, :gender, { books: [] }, :age, :number_of_books_published)
+    params.require(:author).permit(:author_name, :gender, { books: [] }, :age, :publisher, :number_of_books_published)
   end
 end
