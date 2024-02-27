@@ -5,7 +5,7 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
@@ -20,6 +20,16 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
+  production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+#
+# Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
+# for a full overview on how database connection configuration can be specified.
+#
 production:
   <<: *default
-  database: storage/production.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
+  database: my_app_render_production
+  username: my_app_render
+  password: <%= ENV['MY_APP_RENDER_DATABASE_PASSWORD'] %>
