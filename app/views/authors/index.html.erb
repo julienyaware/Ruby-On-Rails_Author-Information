@@ -8,7 +8,8 @@
   <!-- Author Table -->
   <div>
     <div class="btn-group">
-      <%= button_to "Log In", login_path, method: :get, class:"bg-secondary border-0 rounded-pill shadow p-3 m-3" %>
+      <%= button_to "Log In", login_path, method: :get, class:"bg-secondary border-0 rounded-pill shadow p-3 m-3" unless logged_in? %>
+      <%= button_to "Log Out", logout_path, method: :delete, class:"bg-secondary border-0 rounded-pill shadow p-3 m-3" if logged_in?  %>
       <%= button_to "Sign Up", signup_path, method: :get, class:"bg-secondary border-0 rounded-pill shadow p-3 m-3" %>
     </div> 
    <table class="table table-light table-striped">
